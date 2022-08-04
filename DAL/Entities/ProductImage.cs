@@ -1,7 +1,9 @@
 ﻿using System;
+using DAL.Entity;
+
 namespace DAL.Entities
 {
-    public class ProductImage
+    public class ProductImage : IEntity
     {
         public int Id { get; set; }
         public int ProductId { get; set; }

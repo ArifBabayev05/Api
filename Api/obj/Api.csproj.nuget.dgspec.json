@@ -103,7 +103,11 @@
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/babayev_/Desktop/Api/Api/DAL/DAL.csproj": {
+                "projectPath": "/Users/babayev_/Desktop/Api/Api/DAL/DAL.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
