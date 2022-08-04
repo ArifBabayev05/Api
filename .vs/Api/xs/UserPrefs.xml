@@ -1,0 +1,29 @@
+﻿<Properties StartupConfiguration="{08D53142-646B-4191-9205-19AE6E95282C}|Default">
+  <MonoDevelop.Ide.ItemProperties.Business FirstBuild="True" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Api/Startup.cs">
+    <Files>
+      <File FileName="Api/Startup.cs" Line="43" Column="36" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Api" expanded="True">
+            <Node name="Api" expanded="True">
+              <Node name="Properties" expanded="True" />
+            </Node>
+            <Node name="Business" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.ItemProperties.DAL FirstBuild="True" />
+  <MonoDevelop.Ide.ItemProperties.Api FirstBuild="True" PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>
