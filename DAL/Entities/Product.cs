@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using DAL.Entity;
 
 namespace DAL.Entities
 {
-    public class Product
+    public class Product : IEntity
     {
         public int Id { get; set; }
         public string Title { get; set; }

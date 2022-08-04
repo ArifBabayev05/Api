@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Commons;
 using Business.DTO.Product;
 using DAL.Data;
 using DAL.Entities;
@@ -28,7 +29,7 @@ namespace Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var data = await _context.Products.ToListAsync();
+            var data = await _context.Products.Where(n=>!n.IsDeleted).ToListAsync();
             if (data is null)
             {
                 return StatusCode(StatusCodes.Status404NotFound, new { code = 4150, message = "Id is Null" });
@@ -40,7 +41,7 @@ namespace Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int? id)
         {
-            var data = await _context.Products.Where(n=>n.Id == id).FirstOrDefaultAsync();
+            var data = await _context.Products.Where(n=>n.Id == id && !n.IsDeleted).FirstOrDefaultAsync();
             if (data is null)
             {
                 return StatusCode(StatusCodes.Status404NotFound, new{code = 4150, message= "Id is Null" });
@@ -66,14 +67,33 @@ namespace Api.Controllers
             return Ok();
         }
         [HttpPut]
-        public async Task<IActionResult> Update(int id, ProductPutDto productPutDto)
+        public async Task<IActionResult> Update(int id, ProductPutDto producttDto)
         {
-            var dbdata = _context.Products.Where(n => n.Id == id).FirstOrDefaultAsync();
+            var dbdata = await _context.Products.Where(n => n.Id == id).FirstOrDefaultAsync();
             if (dbdata is null)
             {
-                return StatusCode(StatusCodes.Status404NotFound, new { code = 4160, message = "ProductDTO is Null" });
-
+                return StatusCode(StatusCodes.Status404NotFound, new Response(4456,"Id is Invalid"));
             }
+            dbdata.Title = producttDto.Title ?? dbdata.Title;
+            dbdata.Price = producttDto.Price == 0 ? dbdata.Price : producttDto.Price;
+            dbdata.Rate = producttDto.Rate == 0 ? dbdata.Rate : producttDto.Rate;
+            dbdata.UpdatedDate = DateTime.UtcNow.AddHours(4);
+            _context.Products.Update(dbdata);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var dbdata = await _context.Products.Where(n => n.Id == id).FirstOrDefaultAsync();
+            if (dbdata is null)
+            {
+                return StatusCode(StatusCodes.Status404NotFound, new Response(4456, "Id is Invalid"));
+            }
+            dbdata.IsDeleted = true;
+            _context.Products.Update(dbdata);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
     } 
 }
